@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+# coding: utf-8
+import sys
+import csv
+import argparse
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--delimiter', help='Input data delimiter', required=True)
+    args = parser.parse_args(argv)
+    delimiter = args.delimiter.decode('string_escape')
+
+    data = csv.reader(sys.stdin, delimiter=delimiter)
+    writer = csv.writer(sys.stdout, delimiter=',')
+    writer.writerows(data)
