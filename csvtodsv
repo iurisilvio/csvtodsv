@@ -7,9 +7,9 @@ import argparse
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--delimiter', help='Input data delimiter', required=True)
-    args = parser.parse_args(argv)
+    args = parser.parse_args()
     delimiter = args.delimiter.decode('string_escape')
 
-    data = csv.reader(sys.stdin, delimiter=delimiter)
-    writer = csv.writer(sys.stdout, delimiter=',')
+    data = csv.reader(sys.stdin, delimiter=',')
+    writer = csv.writer(sys.stdout, delimiter=delimiter)
     writer.writerows(data)
