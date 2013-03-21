@@ -10,13 +10,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
     delimiter = args.delimiter.decode('string_escape')
 
-    data = csv.reader(sys.stdin, delimiter=delimiter)
+    input_data = sys.stdin
     if delimiter == '\n':
-        _data = list(data)
-        data = []
-        for line in _data:
-            data.extend(line)
-        data = [data]
+        input_data = [col.replace('\n', ',') for col in input_data.read().strip().split('\n%\n')]
+        print input_data
+        delimiter = ','
+    data = csv.reader(input_data, delimiter=delimiter)
 
     writer = csv.writer(sys.stdout, delimiter=',')
     writer.writerows(data)

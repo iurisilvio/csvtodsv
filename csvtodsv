@@ -11,5 +11,8 @@ if __name__ == '__main__':
     delimiter = args.delimiter.decode('string_escape')
 
     data = csv.reader(sys.stdin, delimiter=',')
-    writer = csv.writer(sys.stdout, delimiter=delimiter)
-    writer.writerows(data)
+    writer = csv.writer(sys.stdout, delimiter=delimiter, lineterminator='\n')
+    for i, row in enumerate(data):
+        if i > 0 and delimiter == '\n':
+            writer.writerow(['%'])
+        writer.writerow(row)
